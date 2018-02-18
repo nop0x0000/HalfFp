@@ -1,0 +1,5 @@
+-I/opt/cpputest/include
+-I./include/HalfFp
+-Wall
+-Wextra
+-ansi
