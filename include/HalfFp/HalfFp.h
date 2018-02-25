@@ -39,15 +39,12 @@ typedef unsigned long HalfFp;
 #error Could not find 2 byte basic type.
 #endif
 
+typedef HalfFp HalfFp_Sign;
+typedef int HalfFp_Fraction;
+typedef int HalfFp_Exponent;
 /* }}} */
 
 /* enum definitions by typedef{{{ */
-typedef enum
-{
-    HalfFp_Sign_Plus = 0,
-    HalfFp_Sign_Minus = 0x8000
-} HalfFp_Sign;
-
 typedef enum
 {
     HalfFp_Error_IgnoreSignEnum,
@@ -61,26 +58,30 @@ typedef enum
 extern const HalfFp HalfFp_SIGN_MASK;
 extern const HalfFp HalfFp_EXPONENT_MASK;
 extern const HalfFp HalfFp_FRACTION_MASK;
-extern const unsigned char HalfFp_EXPONENT_BIAS;
-extern const signed char HalfFp_EXPONENT_MAX;
-extern const signed char HalfFp_EXPONENT_MIN;
-extern const unsigned char HalfFp_FRACTION_BITS;
-extern const unsigned char HalfFp_EXPONENT_BITS;
-extern const signed char HalfFp_OFFSET_EXPONENT_MAX;
-extern const signed char HalfFp_OFFSET_EXPONENT_MIN;
+extern const HalfFp_Exponent HalfFp_EXPONENT_BIAS;
+/* extern const HalfFp_Exponent HalfFp_EXPONENT_MAX; */
+/* extern const HalfFp_Exponent HalfFp_EXPONENT_MIN; */
+extern const int HalfFp_FRACTION_BITS;
+extern const int HalfFp_EXPONENT_BITS;
+extern const HalfFp_Sign HalfFp_Sign_PLUS;
+extern const HalfFp_Sign HalfFp_Sign_MINUS;
+
 /* }}} */
 
 /* function prototypes {{{ */
 void HalfFp_Create(void);
 void HalfFp_Destroy(void);
 
-HalfFp      HalfFp_SetSign(HalfFp source, HalfFp_Sign sign);
+HalfFp HalfFp_SetSign(HalfFp source, HalfFp_Sign sign);
 HalfFp_Sign HalfFp_GetSign(HalfFp source);
-HalfFp      HalfFp_SetExponent(HalfFp source, signed char exponent);
-signed char HalfFp_GetExponent(HalfFp source);
-HalfFp HalfFp_SetOffsetExponent(HalfFp source, signed char exponent);
-unsigned char HalfFp_GetOffsetExponent(HalfFp source);
-HalfFp      HalfFp_SetFraction(HalfFp source, HalfFp fraction);
+HalfFp HalfFp_SetExponent(HalfFp source, HalfFp_Exponent exponent);
+HalfFp_Exponent HalfFp_GetExponent(HalfFp source);
+HalfFp HalfFp_SetFraction(HalfFp source, HalfFp_Fraction fraction);
+HalfFp_Fraction HalfFp_GetFraction(HalfFp source);
+HalfFp HalfFp_FromFloat(float source);
+HalfFp HalfFp_Normalize(HalfFp source);
+unsigned int HalfFp_Nlz(HalfFp source);
+float HalfFp_ToFloat(HalfFp source);
 /* }}} */
 
 /* inline functions {{{ */
